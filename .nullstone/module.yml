@@ -1,0 +1,13 @@
+org_name: nullstone
+name: aws-msk
+friendly_name: Kafka Cluster (AWS MSK)
+description: Creates a Kafka cluster using AWS MSK
+category: datastore
+subcategory: ""
+provider_types:
+    - aws
+platform: kafka
+subplatform: msk
+type: ""
+appCategories: []
+is_public: true
