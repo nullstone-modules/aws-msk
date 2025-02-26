@@ -13,9 +13,24 @@ output "cluster_name" {
   description = "string ||| The name of the MSK Cluster"
 }
 
-output "bootstrap_brokers_tls" {
-  value       = aws_msk_cluster.this.bootstrap_brokers_tls
+output "brokers" {
+  value       = split(",", aws_msk_cluster.this.bootstrap_brokers_tls)
+  description = "list(string) ||| The default Bootstrap Brokers of the MSK Cluster (uses TLS)"
+}
+
+output "brokers_port" {
+  value       = 9094
+  description = "number ||| The default port of the bootstrap brokers (uses TLS)"
+}
+
+output "brokers_tls" {
+  value       = split(",", aws_msk_cluster.this.bootstrap_brokers_tls)
   description = "list(string) ||| The TLS-enabled Bootstrap Brokers of the MSK Cluster"
+}
+
+output "log_group" {
+  value       = local.log_group_name
+  description = "string ||| The CloudWatch Log Group that contains logs for the MSK Cluster broker nodes."
 }
 
 output "security_group_id" {

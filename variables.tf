@@ -1,6 +1,6 @@
 variable "kafka_version" {
   type        = string
-  default     = "3.7.0"
+  default     = "3.7.x"
   description = <<EOF
 The version of Apache Kafka.
 For available versions, see https://docs.aws.amazon.com/msk/latest/developerguide/supported-kafka-versions.html
@@ -9,7 +9,7 @@ EOF
 
 variable "instance_type" {
   type        = string
-  default     = "kafka.m5.large"
+  default     = "kafka.m7g.large"
   description = <<EOF
 The instance type to use for the kafka brokers.
 It must be a valid Amazon MSK instance type. (e.g. `kafka.*.*`)

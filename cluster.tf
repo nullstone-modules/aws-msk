@@ -2,6 +2,7 @@ resource "aws_msk_cluster" "this" {
   cluster_name           = local.resource_name
   kafka_version          = var.kafka_version
   number_of_broker_nodes = var.num_broker_nodes
+  tags                   = local.tags
 
   broker_node_group_info {
     instance_type   = var.instance_type
@@ -16,7 +17,7 @@ resource "aws_msk_cluster" "this" {
   }
 
   encryption_info {
-    encryption_at_rest_kms_key_arn = aws_kms_alias.this.arn
+    encryption_at_rest_kms_key_arn = aws_kms_key.this.arn
 
     encryption_in_transit {
       client_broker = "TLS"
@@ -24,7 +25,12 @@ resource "aws_msk_cluster" "this" {
     }
   }
 
-  client_authentication {
-    iam = true
+  logging_info {
+    broker_logs {
+      cloudwatch_logs {
+        enabled   = true
+        log_group = local.log_group_name
+      }
+    }
   }
 }
