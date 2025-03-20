@@ -1,3 +1,16 @@
+resource "aws_msk_configuration" "this" {
+  kafka_versions    = [var.kafka_version]
+  name              = local.resource_name
+  server_properties = <<EOF
+auto.create.topics.enable = true
+delete.topic.enable = true
+EOF
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
 resource "aws_msk_cluster" "this" {
   cluster_name           = local.resource_name
   kafka_version          = var.kafka_version
@@ -23,6 +36,11 @@ resource "aws_msk_cluster" "this" {
       client_broker = "TLS"
       in_cluster    = true
     }
+  }
+
+  configuration_info {
+    arn      = aws_msk_configuration.this.arn
+    revision = aws_msk_configuration.this.latest_revision
   }
 
   logging_info {
