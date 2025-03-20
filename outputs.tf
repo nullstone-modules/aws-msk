@@ -19,7 +19,7 @@ output "brokers" {
 }
 
 output "brokers_port" {
-  value       = 9094
+  value       = local.brokers_port
   description = "number ||| The default port of the bootstrap brokers (uses TLS)"
 }
 
