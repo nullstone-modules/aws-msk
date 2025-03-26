@@ -45,3 +45,9 @@ EOF
     error_message = "The storage size must be at most 16 TiB."
   }
 }
+
+variable "enable_tls" {
+  type        = bool
+  default     = false
+  description = "Enable TLS encryption for client-server connections to the MSK cluster."
+}

@@ -15,7 +15,7 @@ resource "aws_security_group_rule" "msk-to-world" {
 }
 
 locals {
-  brokers_port = 9094 // Plaintext => 9092, TLS => 9094
+  brokers_port = var.enable_tls ? 9094 : 9092 // Plaintext => 9092, TLS => 9094
 }
 
 // Kafka needs access to itself so that Kafka connectors will work

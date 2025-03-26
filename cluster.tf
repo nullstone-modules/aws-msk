@@ -33,8 +33,8 @@ resource "aws_msk_cluster" "this" {
     encryption_at_rest_kms_key_arn = aws_kms_key.this.arn
 
     encryption_in_transit {
-      client_broker = "TLS"
-      in_cluster    = true
+      client_broker = var.enable_tls ? "TLS" : "PLAINTEXT"
+      in_cluster    = var.enable_tls
     }
   }
 

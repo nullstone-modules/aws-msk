@@ -28,6 +28,11 @@ output "brokers_tls" {
   description = "list(string) ||| The TLS-enabled Bootstrap Brokers of the MSK Cluster"
 }
 
+output "brokers_tls_enabled" {
+  value       = var.enable_tls
+  description = "bool ||| Whether or not TLS is enabled for the MSK Cluster"
+}
+
 output "log_group" {
   value       = local.log_group_name
   description = "string ||| The CloudWatch Log Group that contains logs for the MSK Cluster broker nodes."
