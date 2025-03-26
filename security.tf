@@ -14,10 +14,6 @@ resource "aws_security_group_rule" "msk-to-world" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
-locals {
-  brokers_port = var.enable_tls ? 9094 : 9092 // Plaintext => 9092, TLS => 9094
-}
-
 // Kafka needs access to itself so that Kafka connectors will work
 // Kafka connectors inherit the security groups from the Kafka cluster
 // This allows communication between the Kafka cluster and its Kafka connectors

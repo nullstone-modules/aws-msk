@@ -14,18 +14,13 @@ output "cluster_name" {
 }
 
 output "brokers" {
-  value       = split(",", aws_msk_cluster.this.bootstrap_brokers_tls)
-  description = "list(string) ||| The default Bootstrap Brokers of the MSK Cluster (uses TLS)"
+  value       = local.brokers
+  description = "list(string) ||| The addresses of bootstrap servers for the MSK Cluster"
 }
 
 output "brokers_port" {
   value       = local.brokers_port
-  description = "number ||| The default port of the bootstrap brokers (uses TLS)"
-}
-
-output "brokers_tls" {
-  value       = split(",", aws_msk_cluster.this.bootstrap_brokers_tls)
-  description = "list(string) ||| The TLS-enabled Bootstrap Brokers of the MSK Cluster"
+  description = "number ||| The port of the bootstrap brokers"
 }
 
 output "brokers_tls_enabled" {

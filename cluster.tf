@@ -52,3 +52,10 @@ resource "aws_msk_cluster" "this" {
     }
   }
 }
+
+locals {
+  brokers_plaintext = try(split(",", aws_msk_cluster.this.bootstrap_brokers), [])
+  brokers_tls       = try(split(",", aws_msk_cluster.this.bootstrap_brokers_tls), [])
+  brokers           = var.enable_tls ? local.brokers_tls : local.brokers_plaintext
+  brokers_port      = var.enable_tls ? 9094 : 9092 // Plaintext => 9092, TLS => 9094
+}
